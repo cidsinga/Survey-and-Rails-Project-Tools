@@ -1,3 +1,5 @@
 class Survey < ApplicationRecord
   has_many :questions, dependent: :destroy
+  validates :title, presence: true
+  validates_length_of :title, maximum: 100
 end

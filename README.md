@@ -116,3 +116,16 @@ INSTRUCTIONS    _ _ _ __ __ _ _ _
            it { should have_many(:songs) }
          end                                          
                                                                                                                           to spec/models/song_spec.rb
+
+
+* Add validation for title and length: spec/models/album_spec.rb
+
+  describe(Album) do
+    it { should validate_length_of(:name).is_at_most(100) }
+  end         
+
+  * Add validation logic in app/models/album.rb
+
+    class Album < ApplicationRecord
+      validates :name, presence: true
+    end                                                                  
