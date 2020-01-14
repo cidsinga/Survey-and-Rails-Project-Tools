@@ -128,4 +128,32 @@ INSTRUCTIONS    _ _ _ __ __ _ _ _
 
     class Album < ApplicationRecord
       validates :name, presence: true
-    end                                                                  
+    end     
+
+
+*Add  
+              before_save(:titleize_survey)
+
+                  private
+                  def titleize_survey
+                    self.title = self.title.titleize
+                  end
+
+                  end                                                            
+                                               to app/models/album.rb
+
+*Add
+                    Rails.application.routes.draw do
+                    root to: 'albums#index'
+                    resources :albums do
+                    resources :songs
+                    end
+                    end
+                                             to config/routes.rb
+
+* Check routes in terminal      (rake routes)                               
+
+* Add app/controllers/surveys_controller.rb  
+    make all the ruby methods
+    rename album to survey
+    change :genre to :author
