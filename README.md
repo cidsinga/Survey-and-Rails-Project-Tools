@@ -81,4 +81,38 @@ INSTRUCTIONS    _ _ _ __ __ _ _ _
         has_many :songs
       end
 
-* 
+* Add 'models' folder to spec folder and add the album_spec.rb & song_spec.rb
+
+* Add   require 'rails_helper'   to album_spec.rb
+
+* Add
+              group :test do
+              gem 'shoulda-matchers'
+              end                            to GemFile ¡AFTER! all other blocks
+
+
+* Add                                          
+            Shoulda::Matchers.configure do |config|
+              config.integrate do |with|
+                with.test_framework :rspec
+                with.library :rails
+              end
+            end
+                                          to spec/rails_helper.rb
+
+
+* Add
+            require 'rails_helper'
+
+            describe Album do
+              it { should have_many(:songs) }
+            end                                          
+                                            to spec/models/song_spec.rb
+
+* Add
+         require 'rails_helper'
+
+         describe Album do
+           it { should have_many(:songs) }
+         end                                          
+                                                                                                                          to spec/models/song_spec.rb
