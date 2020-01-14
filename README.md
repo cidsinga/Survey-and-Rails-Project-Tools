@@ -157,3 +157,5 @@ INSTRUCTIONS    _ _ _ __ __ _ _ _
     make all the ruby methods
     rename album to survey
     change :genre to :author
+
+* Add layout views for new/edit forms in "apps/views/layouts/_survey_form.html.erb"
