@@ -25,9 +25,11 @@ Question.destroy_all
   surveys = []
   surveys.push(Survey.create!(title: Faker::TvShows::BreakingBad.episode, author: Faker::Superhero.name))
   surveys
-  surveys.each do |survey|
-  Question.create! :q1 => Faker::ChuckNorris.fact,
-                   :survey_id => survey.id
+  rand(3..15).times do |question|
+    surveys.each do |survey|
+    Question.create! :q1 => Faker::ChuckNorris.fact,
+                     :survey_id => survey.id
+    end
   end
 end
 
