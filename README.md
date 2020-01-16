@@ -44,32 +44,52 @@ INSTRUCTIONS    _ _ _ __ __ _ _ _
 
 * bundle exec rails generate rspec:install (in Terminal)
 
-* Run Rails server in Root dir of project [rails s]
+* run rails server in Root dir of project [rails s]
 
 * rake db:create
 
-* rails generate migration [class_name]
+* rails g migration create_[class] (plural)
 
 * Go into db/migrate/2438403258923095723509[project_name] & Add columns
-   EX. t.column(:title, :string) &&  t.timestamps()
+   EX. t.column(:title, :string) &&  t.timestamps() * t.string: name*
 
 *rake db:migrate
 
 *rake db:test:prepare
 
-*create new file in app/models/[class_name].rb and Add
+*create new file in app/models/[class_name].rb (singular naming)and Add
         class [class_name] < ApplicationRecord
         end
 
-* rails g migration create_[class]
+* rails g migration create_[class] for additional classes
+
+
+  FOR MANY 2 MANY RELATIONSHIPS
+  { * rails g migration join_[class]_and_[class] (for join tables)
+
+    *Add  
+    create_table :albums_artists, id: false do |t|
+     t.belongs_to :artist, index: true
+     t.belongs_to :album, index: true
+    end
+                      in [class]_[class].rb (alpha + plural)
+
+
+*Add has_and_belongs_to_many(:class) (plural)
+
+                            in app/models/class.rb
+
+  }
+
+
+
 
 * in new migration, set up relationship between Class1 and Class2
-
-* rails g migration add_foreign_key_for_[class2]
+"rails g migration add_foreign_key_for_[class2]"
 
 * in new migration, set up foreign key relationship between Class1 and Class2
 
-* create a new Model for class in 'app/models/class_name.rb'
+* create a new Model for class in 'app/models/class_name.rb (singular)
 
 * Class2 belongs_to :class1, Class1 has_many :class2
 
@@ -115,14 +135,25 @@ INSTRUCTIONS    _ _ _ __ __ _ _ _
          describe Album do
            it { should have_many(:songs) }
          end                                          
-                                                                                                                          to spec/models/song_spec.rb
+                                to spec/models/song_spec.rb
+
+
+
+    ========MANY TO MANY ======  
+    describe(Album) do
+    it { should have_and_belong_to_many :employees }     
+    end
+    ==========================================
+
 
 
 * Add validation for title and length: spec/models/album_spec.rb
 
   describe(Album) do
     it { should validate_length_of(:name).is_at_most(100) }
-  end         
+  end    
+
+
 
   * Add validation logic in app/models/album.rb
 
