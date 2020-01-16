@@ -26,6 +26,13 @@ Things you may want to cover:
 
 
 INSTRUCTIONS    _ _ _ __ __ _ _ _
+RANDOM COMMANDS :::::::::
+
+   bundle
+   rake db:create
+   rake db:migrate
+   rake db:test:prepare
+   rake db:seed
 
 *rails new 'app name'
 
@@ -173,6 +180,7 @@ INSTRUCTIONS    _ _ _ __ __ _ _ _
                   end                                                            
                                                to app/models/album.rb
 
+
 *Add
                     Rails.application.routes.draw do
                     root to: 'albums#index'
@@ -180,13 +188,67 @@ INSTRUCTIONS    _ _ _ __ __ _ _ _
                     resources :songs
                     end
                     end
+
+                      ========MANY TO MANY ======  
+
+
+
+                      ===========================
                                              to config/routes.rb
+
+
 
 * Check routes in terminal      (rake routes)                               
 
-* Add app/controllers/surveys_controller.rb  
+* Add  "app/controllers/[class]s_controller.rb"  file
+
+"class [Class]sController < ApplicationController"
+
     make all the ruby methods
     rename album to survey
     change :genre to :author
 
-* Add layout views for new/edit forms in "apps/views/layouts/_survey_form.html.erb"
+* Add layout views folders/files for new/edit forms in "apps/views/[class]s
+     edit.html.erb
+     index.html.erb
+     new.html.erb
+     show.html.erb
+
+
+
+
+  *Add      _[class]_form.html.erb" (w/ underscores)
+
+                                        to apps/views/layouts/
+
+*Add       
+            <%= render "layouts/errors", :object => @[class]] %>
+
+            <%= form_for @[class]] do |f| %>
+            <%= f.label :div_name %>
+            <%= f.text_field :div_name %>
+            <%= f.submit %>
+            <% end %>
+                                         to apps/views/layouts/[class]
+
+
+* Add 'faker' to Gemfile & bundle
+
+* Add
+Division.destroy_all
+Employee.destroy_all
+
+50.times do |index|
+divisions = []
+divisions.push(Division.create!(div_name: Faker::TvShows::BreakingBad.episode))
+divisions
+rand(3..15).times do |employee|
+divisions.each do |division|
+Employee.create! :name => Faker::Superhero.name,
+            :division_id => division.id
+end
+end
+end
+
+p "Created #{Division.count} divisions"
+                to db/seeds.rb                                     
